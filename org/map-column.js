@@ -4,15 +4,17 @@ var googlemap =
 {
 	selectaddr:
 	function($addrdiv, $dt, $mapiframe) {
-		if ($addrdiv.data('$lastselecteddt')) {
+		if ( $addrdiv.data('$lastselecteddt') ) {
 			$addrdiv.data('$lastselecteddt').removeClass('selected');
 		}
+
 		$dt.addClass('selected');
 		// <iframe>コンテナーの移動先を算出
 		tmp_entry_h = jQuery('#mapcontainer').height();
 		tmp_iframe_h = jQuery('#mapiframe').height() + $dt.height();
 		tmp_iframe_p = $dt.position().top + tmp_iframe_h;
-		if (tmp_iframe_p > tmp_entry_h) {
+
+		if ( tmp_iframe_p > tmp_entry_h ) {
 			tmp_pos_top = tmp_entry_h - tmp_iframe_h;
 		} else {
 			tmp_pos_top = $dt.position().top;
@@ -51,13 +53,13 @@ var googlemap =
 					// GoogleMapsをロード
 					// ... 切り替え時のリクエストでページのロード時間を抑える
 					$addr.click(function(e) {
-						googlemap.selectaddr($addrdiv, $dt, $mapiframe);
 						e.preventDefault();
+						googlemap.selectaddr($addrdiv, $dt, $mapiframe);
 					});
 				});
 				// 属性追加
 				$dt.data('addr', $address.eq(0).attr('href'));
-				if ($dt.hasClass('selected')) {
+				if ( $dt.hasClass('selected') ) {
 					googlemap.selectaddr($addrdiv, $dt, $mapiframe);
 					$addrdiv.data('$lastselecteddt', $dt);
 					return;
@@ -66,4 +68,5 @@ var googlemap =
 		});
 	}
 }
+
 googlemap.init('addrcolumn', 'mapcolumn');

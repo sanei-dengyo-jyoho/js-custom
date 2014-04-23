@@ -3,18 +3,17 @@ jQuery(document).ready(function() {
 	// 固定ナビゲーション
 	var fixed = 'nav-fixed';
 	var nav = jQuery('#nav');
-	var offset = nav.offset().top + 200;
+	var offset = nav.offset().top + nav.outerHeight() + 105;
 	var top;
-	var duration = 1000;
 	// 固定クラスを追加
 	jQuery(window).scroll(function() {
 		top = jQuery(this).scrollTop();
-		if ((typeof top !== 'undefined') && (top !== '')) {
-			if (top >= offset) {
-				jQuery(nav).addClass(fixed, duration)
+		if ( (typeof top != 'undefined') && (top != '') ) {
+			if ( top >= offset ) {
+				jQuery(nav).addClass(fixed)
 			} else {
-				if (top <= offset) {
-					jQuery(nav).removeClass(fixed, duration)
+				if ( top <= offset ) {
+					jQuery(nav).removeClass(fixed)
 				}
 			}
 		}

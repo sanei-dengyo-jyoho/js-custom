@@ -5,22 +5,21 @@
 */
 ;(function($) {
 
-	$.timeliner = function(options){
+	$.timeliner = function(options) {
 	// default plugin settings
 	settings = jQuery.extend({
-		timelineContainer: '#timelineContainer', // value: selector of the main element holding the timeline's content, default to #timelineContainer
-		startState: 'closed', // value: closed | open, default to closed; determines whether the timeline is initially collapsed or fully expanded 
-		baseSpeed: 200 // value: any integer, default to 200; determines the base speed, some animations are a multiple (4x) of the base speed
+		timelineContainer: '#timelineContainer',
+		startState: 'closed', 
+		baseSpeed: 200
 	}, options);
 
 		$(document).ready(function() {
 
 			// If startState option is set to closed, hide all the events; else, show fully expanded upon load
-			if(settings.startState=='closed')
-			{
+			if( settings.startState == 'closed' ) {
 				$('.timelineEvent').hide();
 				$('.timelineEventDT').show();
-			}else{
+			} else {
 				$('.timelineMinor dt, .timelineMinor dt a')
 					.addClass('open')
 					.css('fontSize', '1.2em');
@@ -29,7 +28,7 @@
 			}
 
 			// Single Event
-			$('.timelineMinor dt').toggle(function(){
+			$('.timelineMinor dt').toggle(function() {
 
 				var currentId = $(this).attr('id');
 
@@ -42,8 +41,7 @@
 				$('#'+currentId+'DT').hide(1*settings.baseSpeed);
 				$('#'+currentId+'EX').show(4*settings.baseSpeed);
 
-			},function()
-			{
+			}, function() {
 				var currentId = $(this).attr('id');
 
 				// close Event
@@ -58,8 +56,7 @@
 			});
 
 			// Single Major Marker
-			$('.timelineMajorMarker').toggle(function()
-			{
+			$('.timelineMajorMarker').toggle(function() {
 				// reset all animations
 				$(this).css('fontSize', '1.533em');
 				$(this).parents('.timelineMajor').find('dt a', 'dl.timelineMinor')
@@ -69,8 +66,7 @@
 				$(this).parents('.timelineMajor').find('.timelineEventDT').hide(1*settings.baseSpeed);
 				$(this).parents('.timelineMajor').find('.timelineEvent').show(4*settings.baseSpeed);
 
-			},function()
-			{
+			}, function() {
 				// reset all animations
 				$(this).css('fontSize', '1.333em');
 				$(this).parents('.timelineMajor').find('dl.timelineMinor a')
@@ -82,8 +78,7 @@
 			});
 
 			// All Markers/Events
-			$('.expandAll').toggle(function()
-			{
+			$('.expandAll').toggle(function() {
 				// reset all animations
 				$('.timelineMajorMarker').css('fontSize', '1.533em');
 				$(this).parents(settings.timelineContainer).find('dt a', 'dl.timelineMinor')
@@ -96,8 +91,7 @@
 				$(this).addClass('expandAllopen');
 				$(this).html('');
 
-			},function()
-			{
+			}, function() {
 				// reset all animations
 				$('.timelineMajorMarker').css('fontSize', '1.333em');
 				$(this).parents(settings.timelineContainer).find('dl.timelineMinor a')
@@ -112,4 +106,5 @@
 			});
 		});
 	};
-})(jQuery);
+
+}) (jQuery);
